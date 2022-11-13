@@ -1,0 +1,5 @@
+.photo-grid__like_active {
+  background-image: url(../../../../image/Like_active.svg);
+  background-size: contain;
+  background-repeat: no-repeat;
+}
