@@ -2,3 +2,12 @@
   max-width: 100%;
 }
 
+@media screen and (max-width: 466px){
+  .profile__info {
+    max-width: 282px;
+  }
+}
+
+
+
+

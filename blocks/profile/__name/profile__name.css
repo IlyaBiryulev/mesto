@@ -5,13 +5,15 @@
   max-width: 100%;
   margin: 0;
   margin-right: 18px;
-  padding-bottom: 8px;
+  margin-bottom: 8px;
 }
 
 @media screen and (max-width: 468px) {
   .profile__name {
+    margin-bottom: 3px;
     font-size: 27px;
     line-height: 33px;
     margin-right: 10px;
+    padding-left: 26px;
   }
 }

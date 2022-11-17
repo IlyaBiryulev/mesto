@@ -5,10 +5,12 @@
   background-repeat: no-repeat;
   background-size: cover;
   padding-right: 1px;
+  border: 0;
+  background-color: rgba(0, 0, 0, 0);
 }
 
 .photo-grid__like:hover {
   transition: 0.5s;
-  opacity: 0.6;
+  opacity: 0.5;
   cursor: pointer;
 }
