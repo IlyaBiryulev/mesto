@@ -24,8 +24,9 @@
       <button class="profile__add-button" type="button"></button>
     </section>
     <section class="photo-grid">
-      <div class="photo-grid__item">
+      <!--<div class="photo-grid__item">
         <img src="./image/photo-grid/joshua-earle--87JyMb9ZfU-unsplash.jpg" alt="Гора Эльбрус" class="photo-grid__image">
+        <button class="photo-grid__delete-btn" type="button"></button>
         <div class="photo-grid__caption">
           <h2 class="photo-grid__title">Гора Эльбрус</h2>
           <button class="photo-grid__like" type="button"></button>
@@ -33,6 +34,7 @@
       </div>
       <div class="photo-grid__item">
         <img src="./image/photo-grid/egor-myznik-2x2XR_JYoKc-unsplash.jpg" alt="Роза Хутор" class="photo-grid__image">
+        <button class="photo-grid__delete-btn" type="button"></button>
         <div class="photo-grid__caption">
           <h2 class="photo-grid__title">Роза Хутор</h2>
           <button class="photo-grid__like" type="button"></button>
@@ -40,6 +42,7 @@
       </div>
       <div class="photo-grid__item">
         <img src="./image/photo-grid/kirill-pershin-1556355-unsplash.png" alt="Домбай" class="photo-grid__image">
+        <button class="photo-grid__delete-btn" type="button"></button>
         <div class="photo-grid__caption">
           <h2 class="photo-grid__title">Домбай</h2>
           <button class="photo-grid__like" type="button"></button>
@@ -47,6 +50,7 @@
       </div>
       <div class="photo-grid__item">
         <img src="./image/photo-grid/nick-night-Rlk65RvKG1U-unsplash.jpg" alt="Алтай" class="photo-grid__image">
+        <button class="photo-grid__delete-btn" type="button"></button>
         <div class="photo-grid__caption">
           <h2 class="photo-grid__title">Алтай</h2>
           <button class="photo-grid__like" type="button"></button>
@@ -54,6 +58,7 @@
       </div>
       <div class="photo-grid__item">
         <img src="./image/photo-grid/vadim-artyukhin-s6DCYQ5vgpA-unsplash.jpg" alt="Байкал" class="photo-grid__image">
+        <button class="photo-grid__delete-btn" type="button"></button>
         <div class="photo-grid__caption">
           <h2 class="photo-grid__title">Байкал</h2>
           <button class="photo-grid__like" type="button"></button>
@@ -61,11 +66,12 @@
       </div>
       <div class="photo-grid__item">
         <img src="./image/photo-grid/anton-maksimov-5642-su-cRu3R42vLjI-unsplash.jpg" alt="Карачаево-Черкесская республика" class="photo-grid__image">
+        <button class="photo-grid__delete-btn" type="button"></button>
         <div class="photo-grid__caption">
           <h2 class="photo-grid__title">Карачаево-Черкесская республика</h2>
           <button class="photo-grid__like" type="button"></button>
         </div>
-      </div>
+      </div>-->
     </section>
   </main>
   <footer class="footer">
@@ -82,6 +88,33 @@
       </form>
     </div>
   </section>
+  <section class="popup popup_add-cards">
+    <div class="popup__container">
+      <h2 class="popup__title">Новое место</h2>
+      <button class="popup__close-button" type="button"></button>
+      <form action="#" class="popup__form popup__form_add" name="profile-add" id="profile-add">
+        <input type="text" class="popup__form-edit popup__form-edit_substitution_name popup__form-edit_name" name="name" form="profile-add" required placeholder="Название">
+        <input type="text" class="popup__form-edit popup__form-edit_substitution_about-me popup__form-edit_link" name="name" form="profile-add" required placeholder="Ссылка на картинку">
+        <button class="popup__submit-button" type="submit">Создать</button>
+      </form>
+    </div>
+  </section>
+  <section class="popup popup_open-img">
+    <div class="popup__img-container">
+      <button class="popup__close-button" type="button"></button>
+      <img class="popup__image" src="https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg" alt="Архыз">
+      <p class="popup__img-description">Архыз</p>
+    </div>
+  </section>
+  <template class="cards-template">
+    <div class="photo-grid__item">
+      <img src="" alt="" class="photo-grid__image photo-grid__image_popup">
+      <button class="photo-grid__delete-btn" type="button"></button>
+      <div class="photo-grid__caption">
+        <h2 class="photo-grid__title photo-grid__title_popup"></h2>
+        <button class="photo-grid__like" type="button"></button>
+      </div>
+  </template>
   <script src="./scripts/index.js"></script>
 </body>
 </html>
