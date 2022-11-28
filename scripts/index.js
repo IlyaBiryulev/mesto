@@ -80,17 +80,6 @@ const createElement = item => {
   return card;
 }
 
-const renderCards = (item, wrapElement) => {
-  const element = createElement(item);
-  wrapElement.prepend(element);
-}
-
-initialCards.forEach(function(item) {
-  renderCards(item, initialCardsEl)
-  /*const element = createElement(item);
-  initialCardsEl.append(element);*/
-})
-
 //--------------------------------------------------------------------------------------------
 //OPEN POPUP-EDIT
 const openPopup = () => {
@@ -123,7 +112,17 @@ const handlerLikeButtonClick = e => {
 const handlerDeleteButtonClick = e => {
   e.target.closest('.photo-grid__item').remove()
 }
+//--------------------------------------------------------------------------------------------
+const renderCards = (item, wrapElement) => {
+  const element = createElement(item);
+  wrapElement.prepend(element);
+}
 
+initialCards.forEach(function(item) {
+  renderCards(item, initialCardsEl)
+  /*const element = createElement(item);
+  initialCardsEl.append(element);*/
+})
 //--------------------------------------------------------------------------------------------
 //FUNC CLOSE POPUP
 const closePopup = () => {
