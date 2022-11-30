@@ -27,10 +27,10 @@ const initialCards = [
 ];
 //--------------------------------------------------------------------------------------------
 //POPUP OPEN/CLOSE
-const popupElement = document.querySelector('.popup');
+const popupElement = document.querySelector('.profile-popup');
 const popupAddElement = document.querySelector('.popup_add-cards');
 const popupImgElement = document.querySelector('.popup_open-img');
-const closeButton = document.querySelectorAll('.popup__close-button');
+const closeButtons = document.querySelectorAll('.popup__close-button');
 
 //POPUP EDIT-FORM
 const formElement = popupElement.querySelector('.popup__form');
@@ -82,7 +82,15 @@ const createElement = item => {
 
 //--------------------------------------------------------------------------------------------
 //OPEN POPUP-EDIT
-const openPopup = () => {
+const openPopup = (popup) => {
+  popup.classList.add('popup_opened');
+}
+
+const openedEditForm = () => {
+  nameInput.value = profileName.textContent;
+  jobInput.value = profileJob.textContent;
+}
+/*const openPopup = () => {
   popupElement.classList.add('popup_opened');
   nameInput.value = profileName.textContent;
   jobInput.value = profileJob.textContent;
@@ -94,13 +102,14 @@ const openAddPopup = () => {
 //OPEN POPUP-IMG
 const openImgPopup = () => {
   popupImgElement.classList.add('popup_opened');
-}
+}*/
 //--------------------------------------------------------------------------------------------
 //FUNC FOR OPENED IMG POPUP
 const openedImgPopup = (evt) => {
   popupCardTitle.textContent = evt.target.closest('.photo-grid__item').textContent
   popupCardImg.src = evt.currentTarget.src;
-  openImgPopup()
+  popupCardImg.alt = evt.currentTarget.alt;
+  openPopup(popupImgElement)
 }
 
 //FUNC FOR LIKE
@@ -125,23 +134,26 @@ initialCards.forEach(function(item) {
 })
 //--------------------------------------------------------------------------------------------
 //FUNC CLOSE POPUP
-const closePopup = () => {
-  popupElement.classList.remove('popup_opened');
+const closePopup = (popup) => {
+  popup.classList.remove('popup_opened');
+  /*popupElement.classList.remove('popup_opened');
   popupAddElement.classList.remove('popup_opened');
-  popupImgElement.classList.remove('popup_opened');
+  popupImgElement.classList.remove('popup_opened');*/
 }
 //--------------------------------------------------------------------------------------------
 //SUBMIT FOR EDIT
-function formSubmitHandler (evt) {
+function handleProfileFormSubmit (evt) {
     evt.preventDefault();
     profileName.textContent = nameInput.value;
     profileJob.textContent = jobInput.value;
 
-    closePopup ();
+    closePopup(popupElement);
 }
+
 //SUBMIT FOR ADD
-const formSubmitAdd = (evt) => {
+const handleAddFormSubmit = (evt) => {
   evt.preventDefault();
+  evt.target.reset()
   const addForm = {
     name: formInputName.value,
     link: formInputLink.value
@@ -149,20 +161,29 @@ const formSubmitAdd = (evt) => {
 
   renderCards(addForm, initialCardsEl);
 
-  closePopup ();
-  evt.target.reset();
+  closePopup(popupAddElement)
+  evt.target.reset()
 }
 //--------------------------------------------------------------------------------------------
 //CLICK OPEN
-profileEditButton.addEventListener('click', openPopup);
-profileAddButton.addEventListener('click', openAddPopup);
-//CLICK CLOSE
-closeButton.forEach(function(element) {
-  element.addEventListener('click', closePopup);
+profileEditButton.addEventListener('click', () => {
+  openPopup(popupElement);
+  openedEditForm();
 });
+profileAddButton.addEventListener('click', () => openPopup(popupAddElement));
+//CLICK CLOSE
+closeButtons.forEach((button) => {
+  const popup = button.closest('.popup');
+  button.addEventListener('click', () => closePopup(popup));
+});
+/*closeButtons.forEach(function(element) {
+  element.addEventListener('click', () => closePopup(popupElement));
+  element.addEventListener('click', () => closePopup(popupAddElement));
+  element.addEventListener('click', () => closePopup(popupImgElement));
+});*/
 
 //closeButton.addEventListener('click', closePopup);
 //--------------------------------------------------------------------------------------------
-formElement.addEventListener('submit', formSubmitHandler);
-formAddElement.addEventListener('submit', formSubmitAdd);
+formElement.addEventListener('submit', handleProfileFormSubmit);
+formAddElement.addEventListener('submit', handleAddFormSubmit);
 
