@@ -153,7 +153,6 @@ function handleProfileFormSubmit (evt) {
 //SUBMIT FOR ADD
 const handleAddFormSubmit = (evt) => {
   evt.preventDefault();
-  evt.target.reset()
   const addForm = {
     name: formInputName.value,
     link: formInputLink.value
