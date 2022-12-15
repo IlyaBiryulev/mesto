@@ -1,12 +1,15 @@
+//ERROR
+//FUNC SHOW ERROR
 const showInputError = (formSelector, inputSelector, errorMessage, config) => {
     const {inputErrorClass, errorClass} = config;
     const errorElement = formSelector.querySelector(`.${inputSelector.id}-error`);
+    console.log(formSelector)
     console.log(errorElement)
     inputSelector.classList.add(inputErrorClass);
     errorElement.textContent = errorMessage;
     errorElement.classList.add(errorClass);
   };
-
+//FUNC HIDE ERROR
   const hideInputError = (formSelector, inputSelector, config) => {
     const {inputErrorClass, errorClass} = config;
     const errorElement = formSelector.querySelector(`.${inputSelector.id}-error`);
@@ -40,12 +43,11 @@ const toggleButtonState = (inputSelector, buttonElement, config) => {
 
   const setEventListeners = (formSelector, config) => {
     const {inputSelector, submitButtonSelector, ...restConfig} = config;
-    const inputList = [...formSelector.querySelectorAll(inputSelector)];
-    console.log(inputList)
+    const inputList = Array.from(formSelector.querySelectorAll(inputSelector));
     const buttonElement = formSelector.querySelector(submitButtonSelector);
-    inputList.forEach((inputElement) => {
-      inputElement.addEventListener('input', function () {
-        checkInputValidity(formElement, inputElement, restConfig);
+    inputList.forEach((inputSelector) => {
+        inputSelector.addEventListener('input', function () {
+        checkInputValidity(formSelector, inputSelector, restConfig);
         toggleButtonState(inputList, buttonElement, restConfig)
       });
     });
@@ -54,7 +56,7 @@ const toggleButtonState = (inputSelector, buttonElement, config) => {
 const enableValidation = (config) => {
     const {formSelector, ...restConfig} = config;
     const forms =[...document.querySelectorAll(formSelector)];
-
+    console.log(forms)
     forms.forEach((formSelector) => {
         formSelector.addEventListener('submit', (e) => {
             e.preventDefault()
