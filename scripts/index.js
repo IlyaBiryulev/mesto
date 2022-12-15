@@ -59,6 +59,7 @@ const cadrsTemplate = document.querySelector('.cards-template').content.querySel
 const popupCardImg = popupImgElement.querySelector('.popup__image');
 const popupCardTitle = popupImgElement.querySelector('.popup__img-description');
 //--------------------------------------------------------------------------------------------
+
 //FUNC FOR ADD CARDS
 const createElement = item => {
   const card = cadrsTemplate.cloneNode(true);
@@ -79,11 +80,27 @@ const createElement = item => {
 
   return card;
 }
+//--------------------------------------------------------------------------------------------
+//FUNC FOR CLOSE POPUP ON ESC
+const closeModalOnEsc = (evt) => {
+  const openModal = document.querySelector('.popup_opened');
+  if(evt.keyCode == 27) {
+    closePopup(openModal)
+  }
+}
+//FUNC FOR CLOSE POPUP ON OVERLAY
+const closeModalOnOverlay = (evt) => {
+  const openModal = document.querySelector('.popup_opened');
+  if(evt.target === evt.currentTarget) {
+    closePopup(openModal)
+  }
+}
 
 //--------------------------------------------------------------------------------------------
 //OPEN POPUP-EDIT
 const openPopup = (popup) => {
   popup.classList.add('popup_opened');
+  document.addEventListener('keydown', closeModalOnEsc)
 }
 
 const openedEditForm = () => {
@@ -136,6 +153,7 @@ initialCards.forEach(function(item) {
 //FUNC CLOSE POPUP
 const closePopup = (popup) => {
   popup.classList.remove('popup_opened');
+  document.removeEventListener('keydown', closeModalOnEsc)
   /*popupElement.classList.remove('popup_opened');
   popupAddElement.classList.remove('popup_opened');
   popupImgElement.classList.remove('popup_opened');*/
@@ -175,6 +193,11 @@ closeButtons.forEach((button) => {
   const popup = button.closest('.popup');
   button.addEventListener('click', () => closePopup(popup));
 });
+//CLICK CLOSE POPUP ON OVERLAY
+popupElement.addEventListener('click', closeModalOnOverlay);
+popupAddElement.addEventListener('click', closeModalOnOverlay);
+popupImgElement.addEventListener('click', closeModalOnOverlay);
+
 /*closeButtons.forEach(function(element) {
   element.addEventListener('click', () => closePopup(popupElement));
   element.addEventListener('click', () => closePopup(popupAddElement));
