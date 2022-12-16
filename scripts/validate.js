@@ -78,7 +78,7 @@ export const config = {
   form: '.popup__form',
   input: '.popup__form-edit',
   submitButton: '.popup__submit-button',
-  inactiveButtonClass: 'popup__form-btn-submit_disabled',
+  inactiveButtonClass: 'popup__form-button-submit_disabled',
   inputErrorClass: 'popup__form_input_type_error',
   errorClass: 'popup__form-error_active'
 };
