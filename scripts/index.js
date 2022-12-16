@@ -62,6 +62,9 @@ const popupCardTitle = popupImgElement.querySelector('.popup__img-description');
 
 const escKeyCode = 'Escape';
 
+import { enableValidation } from "./validate.js";
+import { config } from "./validate.js";
+
 //FUNC FOR ADD CARDS
 const createCard = cardData => {
   const card = cadrsTemplate.cloneNode(true);
@@ -163,11 +166,11 @@ const closePopup = (popup) => {
 //--------------------------------------------------------------------------------------------
 //SUBMIT FOR EDIT
 function handleProfileFormSubmit (evt) {
-    evt.preventDefault();
-    profileName.textContent = nameInput.value;
-    profileJob.textContent = jobInput.value;
+  evt.preventDefault();
+  profileName.textContent = nameInput.value;
+  profileJob.textContent = jobInput.value;
 
-    closePopup(profilePopup);
+  closePopup(profilePopup);
 }
 
 //SUBMIT FOR ADD
@@ -186,10 +189,13 @@ const handleAddFormSubmit = (evt) => {
 //--------------------------------------------------------------------------------------------
 //CLICK OPEN
 profileEditButton.addEventListener('click', () => {
-  openPopup(profilePopup);
   fillProfileFormInputs();
+  enableValidation(config)
+  openPopup(profilePopup);
 });
+
 profileAddButton.addEventListener('click', () => {
+  enableValidation(config)
   openPopup(popupAddElement);
 });
 //CLICK CLOSE

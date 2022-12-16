@@ -1,41 +1,41 @@
 //ERROR
 //FUNC SHOW ERROR
-const showInputError = (formSelector, inputSelector, errorMessage, config) => {
+const showInputError = (form, input, errorMessage, config) => {
   const {inputErrorClass, errorClass} = config;
-  const errorElement = formSelector.querySelector(`.${inputSelector.id}-error`);
+  const errorElement = form.querySelector(`.${input.id}-error`);
 
-  inputSelector.classList.add(inputErrorClass);
+  input.classList.add(inputErrorClass);
   errorElement.textContent = errorMessage;
   errorElement.classList.add(errorClass);
 };
 //FUNC HIDE ERROR
-const hideInputError = (formSelector, inputSelector, config) => {
+const hideInputError = (form, input, config) => {
   const {inputErrorClass, errorClass} = config;
-  const errorElement = formSelector.querySelector(`.${inputSelector.id}-error`);
+  const errorElement = form.querySelector(`.${input.id}-error`);
 
-  inputSelector.classList.remove(inputErrorClass);
+  input.classList.remove(inputErrorClass);
   errorElement.classList.remove(errorClass);
   errorElement.textContent = '';
 };
 
-const checkInputValidity = (formSelector, inputSelector, config) => {
-  if (!inputSelector.validity.valid) {
-    showInputError(formSelector, inputSelector, inputSelector.validationMessage, config);
+const checkInputValidity = (form, input, config) => {
+  if (!input.validity.valid) {
+    showInputError(form, input, input.validationMessage, config);
   } else {
-    hideInputError(formSelector, inputSelector, config);
+    hideInputError(form, input, config);
   }
 };
 
 function hasInvalidInput(inputList) {
-  return inputList.some((inputSelector) => {
-    return !inputSelector.validity.valid;
+  return inputList.some((input) => {
+    return !input.validity.valid;
   })
 }
 
-const toggleButtonState = (inputSelector, buttonElement, config) => {
+const toggleButtonState = (input, buttonElement, config) => {
   const {inactiveButtonClass} = config;
 
-  if (hasInvalidInput(inputSelector)) {
+  if (hasInvalidInput(input)) {
   buttonElement.classList.add(inactiveButtonClass);
   buttonElement.disabled = 'disable'
   } else {
@@ -44,40 +44,41 @@ const toggleButtonState = (inputSelector, buttonElement, config) => {
   }
 }
 
-const setEventListeners = (formSelector, config) => {
-  const {inputSelector, submitButtonSelector, ...restConfig} = config;
-  const inputList = Array.from(formSelector.querySelectorAll(inputSelector));
-  const buttonElement = formSelector.querySelector(submitButtonSelector);
+const setEventListeners = (form, config) => {
+  const {input, submitButton, ...restConfig} = config;
+  const inputList = Array.from(form.querySelectorAll(input));
+  const buttonElement = form.querySelector(submitButton);
 
   toggleButtonState(inputList, buttonElement, restConfig)
 
-  inputList.forEach((inputSelector) => {
-      inputSelector.addEventListener('input', function () {
-      checkInputValidity(formSelector, inputSelector, restConfig);
-      toggleButtonState(inputList, buttonElement, restConfig)
-    });
+  inputList.forEach((input) => {
+    if(input.classList.contains(config.inputErrorClass)) {
+      hideInputError(form, input, config);
+    } else {
+      input.addEventListener('input', function () {
+      checkInputValidity(form, input, restConfig);
+      toggleButtonState(inputList, buttonElement, restConfig)});
+    }
   });
 };
 
-const enableValidation = (config) => {
-  const {formSelector, ...restConfig} = config;
-  const forms =[...document.querySelectorAll(formSelector)];
+export const enableValidation = (config) => {
+  const {form, ...restConfig} = config;
+  const forms =[...document.querySelectorAll(form)];
 
-  forms.forEach((formSelector) => {
-    formSelector.addEventListener('submit', (e) => {
+  forms.forEach((form) => {
+    form.addEventListener('submit', (e) => {
       e.preventDefault()
     });
-    setEventListeners(formSelector, restConfig);
+    setEventListeners(form, restConfig);
   })
 }
 
-const config = {
-  formSelector: '.popup__form',
-  inputSelector: '.popup__form-edit',
-  submitButtonSelector: '.popup__submit-button',
+export const config = {
+  form: '.popup__form',
+  input: '.popup__form-edit',
+  submitButton: '.popup__submit-button',
   inactiveButtonClass: 'popup__form-btn-submit_disabled',
   inputErrorClass: 'popup__form_input_type_error',
   errorClass: 'popup__form-error_active'
 };
-
-enableValidation(config);
