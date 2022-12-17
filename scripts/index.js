@@ -195,7 +195,6 @@ profileEditButton.addEventListener('click', () => {
 });
 
 profileAddButton.addEventListener('click', () => {
-  enableValidation(config)
   openPopup(popupAddElement);
 });
 //CLICK CLOSE
