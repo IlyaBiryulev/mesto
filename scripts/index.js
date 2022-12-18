@@ -190,7 +190,6 @@ const handleAddFormSubmit = (evt) => {
 //CLICK OPEN
 profileEditButton.addEventListener('click', () => {
   fillProfileFormInputs();
-  enableValidation(config)
   openPopup(profilePopup);
 });
 
@@ -218,3 +217,4 @@ popupImgElement.addEventListener('click', closeModalOnOverlay);
 profileForm.addEventListener('submit', handleProfileFormSubmit);
 formAddElement.addEventListener('submit', handleAddFormSubmit);
 
+enableValidation(config)

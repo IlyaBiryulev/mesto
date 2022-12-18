@@ -1,41 +1,41 @@
 //ERROR
 //FUNC SHOW ERROR
-const showInputError = (formSelector, inputSelector, errorMessage, config) => {
+const showInputError = (form, input, errorMessage, config) => {
   const {inputErrorClass, errorClass} = config;
-  const errorElement = formSelector.querySelector(`.${inputSelector.id}-error`);
+  const errorElement = form.querySelector(`.${input.id}-error`);
 
-  inputSelector.classList.add(inputErrorClass);
+  input.classList.add(inputErrorClass);
   errorElement.textContent = errorMessage;
   errorElement.classList.add(errorClass);
 };
 //FUNC HIDE ERROR
-const hideInputError = (formSelector, inputSelector, config) => {
+const hideInputError = (form, input, config) => {
   const {inputErrorClass, errorClass} = config;
-  const errorElement = formSelector.querySelector(`.${inputSelector.id}-error`);
+  const errorElement = form.querySelector(`.${input.id}-error`);
 
-  inputSelector.classList.remove(inputErrorClass);
+  input.classList.remove(inputErrorClass);
   errorElement.classList.remove(errorClass);
   errorElement.textContent = '';
 };
 
-const checkInputValidity = (formSelector, input, config) => {
+const checkInputValidity = (form, input, config) => {
   if (!input.validity.valid) {
-    showInputError(formSelector, input, input.validationMessage, config);
+    showInputError(form, input, input.validationMessage, config);
   } else {
-    hideInputError(formSelector, input, config);
+    hideInputError(form, input, config);
   }
 };
 
 function hasInvalidInput(inputList) {
-  return inputList.some((inputSelector) => {
-    return !inputSelector.validity.valid;
+  return inputList.some((input) => {
+    return !input.validity.valid;
   })
 }
 
-const toggleButtonState = (inputSelector, buttonElement, config) => {
+const toggleButtonState = (inputlist, buttonElement, config) => {
   const {inactiveButtonClass} = config;
 
-  if (hasInvalidInput(inputSelector)) {
+  if (hasInvalidInput(inputlist)) {
     buttonElement.classList.add(inactiveButtonClass);
     buttonElement.disabled = 'disable'
   } else {
@@ -49,17 +49,17 @@ const setEventListeners = (form, config) => {
   const inputList = Array.from(form.querySelectorAll(inputSelector));
   const buttonElement = form.querySelector(submitButtonSelector);
 
-  toggleButtonState(inputList, buttonElement, restConfig)
+  form.addEventListener('reset', () => {
+    setTimeout(() => {
+      toggleButtonState(inputList, buttonElement, restConfig);
+    }, 0)
+  })
 
   inputList.forEach((input) => {
-    if(input.classList.contains(config.inputErrorClass)) {
-      hideInputError(form, input, config);
-    } else {
-      input.addEventListener('input', function () {
-        checkInputValidity(form, input, restConfig);
-        toggleButtonState(inputList, buttonElement, restConfig)
-      });
-    }
+    input.addEventListener('input', function () {
+      checkInputValidity(form, input, restConfig);
+      toggleButtonState(inputList, buttonElement, restConfig)
+    });
   });
 };
 
@@ -83,4 +83,3 @@ export const config = {
   inputErrorClass: 'popup__form_input_type_error',
   errorClass: 'popup__form-error_active'
 };
-
