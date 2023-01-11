@@ -1,4 +1,7 @@
 //ARRAY FOR PHOTO-GRID
+import { Card } from "./Card.js";
+import { FormValidator } from "./FormValidator.js";
+
 const initialCards = [
   {
     name: 'Архыз',
@@ -53,7 +56,7 @@ const profileAddButton = profileSection.querySelector('.profile__add-button');
 
 //TEMPLATE
 const cardsContainer = document.querySelector('.photo-grid');
-const cadrsTemplate = document.querySelector('.cards-template').content.querySelector('.photo-grid__item');
+const cadrsTemplate = '.cards-template';
 
 //POPUP IMG
 const popupCardImg = popupImgElement.querySelector('.popup__image');
@@ -62,29 +65,14 @@ const popupCardTitle = popupImgElement.querySelector('.popup__img-description');
 
 const escKeyCode = 'Escape';
 
-import { enableValidation } from "./validate.js";
-import { config } from "./validate.js";
-
-//FUNC FOR ADD CARDS
-const createCard = cardData => {
-  const card = cadrsTemplate.cloneNode(true);
-
-  const cardTitle = card.querySelector('.photo-grid__title');
-  const cardImg = card.querySelector('.photo-grid__image');
-
-  const cardsLikeButton = card.querySelector('.photo-grid__like');
-  const cardsDeleteButton = card.querySelector('.photo-grid__delete-btn');
-
-  cardImg.addEventListener('click', openImgPopup);
-  cardsLikeButton.addEventListener('click', handleCardLike);
-  cardsDeleteButton.addEventListener('click', handleCardDelete);
-
-  cardTitle.textContent = cardData.name;
-  cardImg.src = cardData.link;
-  cardImg.alt = cardData.name;
-
-  return card;
-}
+const config = {
+  formSelector: '.popup__form',
+  inputSelector: '.popup__form-edit',
+  submitButtonSelector: '.popup__submit-button',
+  inactiveButtonClass: 'popup__submit-button_disabled',
+  inputErrorClass: 'popup__form_input_type_error',
+  errorClass: 'popup__form-error_active'
+};
 //--------------------------------------------------------------------------------------------
 //FUNC FOR CLOSE POPUP ON ESC
 const closeModalOnEsc = (evt) => {
@@ -112,57 +100,38 @@ const fillProfileFormInputs = () => {
   nameInput.value = profileName.textContent;
   jobInput.value = profileJob.textContent;
 }
-/*const openPopup = () => {
-  popupElement.classList.add('popup_opened');
-  nameInput.value = profileName.textContent;
-  jobInput.value = profileJob.textContent;
-}
-//OPEN POPUP-ADD
-const openAddPopup = () => {
-  popupAddElement.classList.add('popup_opened');
-}
-//OPEN POPUP-IMG
-const openImgPopup = () => {
-  popupImgElement.classList.add('popup_opened');
-}*/
 //--------------------------------------------------------------------------------------------
 //FUNC FOR OPENED IMG POPUP
-const openImgPopup = (evt) => {
-  popupCardTitle.textContent = evt.target.closest('.photo-grid__item').textContent
-  popupCardImg.src = evt.currentTarget.src;
-  popupCardImg.alt = evt.currentTarget.alt;
+const openImgPopup = (cardTitle) => {
+  popupCardTitle.textContent = cardTitle.textContent
+  popupCardImg.src = document.querySelector('.photo-grid__image').src;
+  popupCardImg.alt = cardTitle.textContent;
   openPopup(popupImgElement)
 }
 
-//FUNC FOR LIKE
-const handleCardLike = e => {
-  e.target.classList.toggle('photo-grid__like_active')
-}
-
-//FUNC FOR DELETE CARD
-const handleCardDelete = e => {
-  e.target.closest('.photo-grid__item').remove()
-}
-//--------------------------------------------------------------------------------------------
-const renderCard = (cardData, wrapElement) => {
-  const element = createCard(cardData);
-  wrapElement.prepend(element);
-}
-
-initialCards.forEach(function(item) {
-  renderCard(item, cardsContainer)
-  /*const element = createElement(item);
-  initialCardsEl.append(element);*/
+initialCards.forEach((item) => {
+  const card = new Card(item, cadrsTemplate, openImgPopup)
+  const cardElement = card.generateCard();
+  cardsContainer.append(cardElement);
 })
+
+const renderCard = (item) => {
+  const card = new Card(item, cadrsTemplate, openImgPopup)
+  const cardElement = card.generateCard();
+  cardsContainer.append(cardElement);
+}
 //--------------------------------------------------------------------------------------------
 //FUNC CLOSE POPUP
 const closePopup = (popup) => {
   popup.classList.remove('popup_opened');
   document.removeEventListener('keydown', closeModalOnEsc)
-  /*popupElement.classList.remove('popup_opened');
-  popupAddElement.classList.remove('popup_opened');
-  popupImgElement.classList.remove('popup_opened');*/
 }
+
+const beginValidation = (formSelector) => {
+  const form = new FormValidator(config, formSelector);
+  form.enableValidation(formSelector);
+}
+
 //--------------------------------------------------------------------------------------------
 //SUBMIT FOR EDIT
 function handleProfileFormSubmit (evt) {
@@ -181,7 +150,7 @@ const handleAddFormSubmit = (evt) => {
     link: formInputLink.value
   }
 
-  renderCard(cardData, cardsContainer);
+  renderCard(cardData);
 
   closePopup(popupAddElement)
   evt.target.reset()
@@ -190,6 +159,8 @@ const handleAddFormSubmit = (evt) => {
 //CLICK OPEN
 profileEditButton.addEventListener('click', () => {
   fillProfileFormInputs();
+  const form = new FormValidator(config, profileForm);
+  form.resetValidation(profileForm);
   openPopup(profilePopup);
 });
 
@@ -205,16 +176,10 @@ closeButtons.forEach((button) => {
 profilePopup.addEventListener('click', closeModalOnOverlay);
 popupAddElement.addEventListener('click', closeModalOnOverlay);
 popupImgElement.addEventListener('click', closeModalOnOverlay);
-
-/*closeButtons.forEach(function(element) {
-  element.addEventListener('click', () => closePopup(popupElement));
-  element.addEventListener('click', () => closePopup(popupAddElement));
-  element.addEventListener('click', () => closePopup(popupImgElement));
-});*/
-
-//closeButton.addEventListener('click', closePopup);
 //--------------------------------------------------------------------------------------------
 profileForm.addEventListener('submit', handleProfileFormSubmit);
 formAddElement.addEventListener('submit', handleAddFormSubmit);
 
-enableValidation(config)
+beginValidation(profileForm);
+beginValidation(formAddElement);
+
