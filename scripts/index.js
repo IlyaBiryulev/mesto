@@ -84,8 +84,7 @@ const closeModalOnEsc = (evt) => {
 //FUNC FOR CLOSE POPUP ON OVERLAY
 const closeModalOnOverlay = (evt) => {
   if(evt.target === evt.currentTarget) {
-    const openModal = document.querySelector('.popup_opened');
-    closePopup(openModal)
+    closePopup(evt.target)
   }
 }
 
@@ -102,24 +101,24 @@ const fillProfileFormInputs = () => {
 }
 //--------------------------------------------------------------------------------------------
 //FUNC FOR OPENED IMG POPUP
-const openImgPopup = (cardTitle) => {
-  popupCardTitle.textContent = cardTitle.textContent
-  popupCardImg.src = document.querySelector('.photo-grid__image').src;
-  popupCardImg.alt = cardTitle.textContent;
+const openImgPopup = (name, link) => {
+  popupCardTitle.textContent = name;
+  popupCardImg.src = link;
+  popupCardImg.alt = name;
   openPopup(popupImgElement)
 }
 
-initialCards.forEach((item) => {
+function createCard(item) {
   const card = new Card(item, cadrsTemplate, openImgPopup)
   const cardElement = card.generateCard();
-  cardsContainer.append(cardElement);
-})
+  return cardElement
+}
 
 const renderCard = (item) => {
-  const card = new Card(item, cadrsTemplate, openImgPopup)
-  const cardElement = card.generateCard();
-  cardsContainer.append(cardElement);
+  cardsContainer.prepend(createCard(item));
 }
+
+initialCards.reverse().forEach(item => renderCard(item));
 //--------------------------------------------------------------------------------------------
 //FUNC CLOSE POPUP
 const closePopup = (popup) => {
@@ -128,10 +127,15 @@ const closePopup = (popup) => {
 }
 
 const beginValidation = (formSelector) => {
-  const form = new FormValidator(config, formSelector);
-  form.enableValidation(formSelector);
+  const validator = new FormValidator(config, formSelector);
+  return validator
 }
 
+const profileFormValidator = beginValidation(profileForm);
+profileFormValidator.enableValidation(profileForm);
+
+const formAddValidator = beginValidation(formAddElement);
+formAddValidator.enableValidation(formAddElement)
 //--------------------------------------------------------------------------------------------
 //SUBMIT FOR EDIT
 function handleProfileFormSubmit (evt) {
@@ -159,12 +163,12 @@ const handleAddFormSubmit = (evt) => {
 //CLICK OPEN
 profileEditButton.addEventListener('click', () => {
   fillProfileFormInputs();
-  const form = new FormValidator(config, profileForm);
-  form.resetValidation(profileForm);
+  profileFormValidator.resetValidation(profileForm);
   openPopup(profilePopup);
 });
 
 profileAddButton.addEventListener('click', () => {
+  formAddValidator.resetValidation(formAddElement);
   openPopup(popupAddElement);
 });
 //CLICK CLOSE
@@ -180,6 +184,4 @@ popupImgElement.addEventListener('click', closeModalOnOverlay);
 profileForm.addEventListener('submit', handleProfileFormSubmit);
 formAddElement.addEventListener('submit', handleAddFormSubmit);
 
-beginValidation(profileForm);
-beginValidation(formAddElement);
 
