@@ -1,78 +1,31 @@
 //ARRAY FOR PHOTO-GRID
-import { Card } from "./Card.js";
-import { FormValidator } from "./FormValidator.js";
+import { Card } from "../components/Card.js";
+import { FormValidator } from "../components/FormValidator.js";
+import Section from "../components/Section.js";
 
-const initialCards = [
-  {
-    name: 'Архыз',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
-  },
-  {
-    name: 'Челябинская область',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
-  },
-  {
-    name: 'Иваново',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
-  },
-  {
-    name: 'Камчатка',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
-  },
-  {
-    name: 'Холмогорский район',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
-  },
-  {
-    name: 'Байкал',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
-  }
-];
-//--------------------------------------------------------------------------------------------
-//POPUP OPEN/CLOSE
-const profilePopup = document.querySelector('.profile-popup');
-const popupAddElement = document.querySelector('.popup_add-cards');
-const popupImgElement = document.querySelector('.popup_open-img');
-const closeButtons = document.querySelectorAll('.popup__close-button');
+import { initialCards,
+  profilePopup,
+  popupAddElement,
+  popupImgElement,
+  closeButtons,
+  profileForm,
+  nameInput,
+  jobInput,
+  formAddElement,
+  formInputName,
+  formInputLink,
+  profileSection,
+  profileName,
+  profileJob,
+  profileEditButton,
+  profileAddButton,
+  cardsContainer,
+  cadrsTemplate,
+  popupCardImg,
+  popupCardTitle,
+  escKeyCode,
+  config } from "../utils/constants.js";
 
-//POPUP EDIT-FORM
-const profileForm = profilePopup.querySelector('.popup__form');
-const nameInput =  profileForm.querySelector('.popup__form-edit_substitution_name');
-const jobInput = profileForm.querySelector('.popup__form-edit_substitution_about-me');
-
-//POPUP ADD-FORM
-const formAddElement = popupAddElement.querySelector('.popup__form_add');
-const formInputName = popupAddElement.querySelector('.popup__form-edit_name');
-const formInputLink = popupAddElement.querySelector('.popup__form-edit_link');
-
-//PROFILE ELEMENTS
-const profileSection = document.querySelector('.profile');
-const profileName = profileSection.querySelector('.profile__name');
-const profileJob = profileSection.querySelector('.profile__about-me');
-
-//BUTTONS EDIT AND ADD
-const profileEditButton = profileSection.querySelector('.profile__edit-button');
-const profileAddButton = profileSection.querySelector('.profile__add-button');
-
-//TEMPLATE
-const cardsContainer = document.querySelector('.photo-grid');
-const cadrsTemplate = '.cards-template';
-
-//POPUP IMG
-const popupCardImg = popupImgElement.querySelector('.popup__image');
-const popupCardTitle = popupImgElement.querySelector('.popup__img-description');
-//--------------------------------------------------------------------------------------------
-
-const escKeyCode = 'Escape';
-
-const config = {
-  formSelector: '.popup__form',
-  inputSelector: '.popup__form-edit',
-  submitButtonSelector: '.popup__submit-button',
-  inactiveButtonClass: 'popup__submit-button_disabled',
-  inputErrorClass: 'popup__form_input_type_error',
-  errorClass: 'popup__form-error_active'
-};
 //--------------------------------------------------------------------------------------------
 //FUNC FOR CLOSE POPUP ON ESC
 const closeModalOnEsc = (evt) => {
@@ -114,11 +67,14 @@ function createCard(item) {
   return cardElement
 }
 
-const renderCard = (item) => {
-  cardsContainer.prepend(createCard(item));
-}
+const cardList = new Section({
+  data: initialCards,
+  renderer: (item) => {
+    cardList.addItem(createCard(item))
+  }
+}, cardsContainer)
 
-initialCards.reverse().forEach(item => renderCard(item));
+cardList.renderItems();
 //--------------------------------------------------------------------------------------------
 //FUNC CLOSE POPUP
 const closePopup = (popup) => {
