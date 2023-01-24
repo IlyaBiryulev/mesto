@@ -26,20 +26,20 @@ export const initialCards = [
 ];
 //--------------------------------------------------------------------------------------------
 //POPUP OPEN/CLOSE
-export const profilePopup = document.querySelector('.profile-popup');
-export const popupAddElement = document.querySelector('.popup_add-cards');
-export const popupImgElement = document.querySelector('.popup_open-img');
-export const closeButtons = document.querySelectorAll('.popup__close-button');
+export const profilePopup = '.profile-popup';
+export const popupAddElement = '.popup_add-cards';
+export const popupImgElement = '.popup_open-img';
+//export const closeButtons = document.querySelectorAll('.popup__close-button');
 
 //POPUP EDIT-FORM
-export const profileForm = profilePopup.querySelector('.popup__form');
+export const profileForm = document.querySelector('.popup__form');
 export const nameInput =  profileForm.querySelector('.popup__form-edit_substitution_name');
 export const jobInput = profileForm.querySelector('.popup__form-edit_substitution_about-me');
 
 //POPUP ADD-FORM
-export const formAddElement = popupAddElement.querySelector('.popup__form_add');
-export const formInputName = popupAddElement.querySelector('.popup__form-edit_name');
-export const formInputLink = popupAddElement.querySelector('.popup__form-edit_link');
+export const formAddElement = document.querySelector('.popup__form_add');
+export const formInputName = formAddElement.querySelector('.popup__form-edit_name');
+export const formInputLink = formAddElement.querySelector('.popup__form-edit_link');
 
 //PROFILE ELEMENTS
 export const profileSection = document.querySelector('.profile');
@@ -52,11 +52,12 @@ export const profileAddButton = profileSection.querySelector('.profile__add-butt
 
 //TEMPLATE
 export const cardsContainer = '.photo-grid';
+export const cardsSelector = document.querySelector('.photo-grid');
 export const cadrsTemplate = '.cards-template';
 
 //POPUP IMG
-export const popupCardImg = popupImgElement.querySelector('.popup__image');
-export const popupCardTitle = popupImgElement.querySelector('.popup__img-description');
+//export const popupCardImg = popupImgElement.querySelector('.popup__image');
+//export const popupCardTitle = popupImgElement.querySelector('.popup__img-description');
 
 export const escKeyCode = 'Escape';
 
