@@ -20,8 +20,6 @@ export class PopupWithForm extends Popup {
 
     });
 
-    console.log(popupInputsValue)
-
     return popupInputsValue;
   }
 
