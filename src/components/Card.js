@@ -4,6 +4,7 @@ export class Card {
     this._link = cardData.link;
     this._templateSelector = templateSelector;
     this._handleCardClick = handleCardClick;
+
   }
 
   _getTemplate() {
@@ -14,35 +15,34 @@ export class Card {
   generateCard() {
     this.element = this._getTemplate();
 
-    const cardTitle = this.element.querySelector('.photo-grid__title');
-    const cardImg = this.element.querySelector('.photo-grid__image');
+    this._title = this.element.querySelector('.photo-grid__title');
+    this._likeButton = this.element.querySelector('.photo-grid__like');
+    this._deleteButton = this.element.querySelector('.photo-grid__delete-btn');
+    this._cardImg = this.element.querySelector('.photo-grid__image');
 
-    const cardsLikeButton = this.element.querySelector('.photo-grid__like');
-    const cardsDeleteButton = this.element.querySelector('.photo-grid__delete-btn');
+    this._title.textContent = this._name;
+    this._cardImg.src = this._link;
+    this._cardImg.alt = this._name;
 
-    cardTitle.textContent = this._name;
-    cardImg.src = this._link;
-    cardImg.alt = this._name;
-
-    this._setEventListeners(cardImg, cardsLikeButton, cardsDeleteButton)
+    this._setEventListeners()
 
     return this.element;
   }
 
-  _setEventListeners(cardImg, cardsLikeButton, cardsDeleteButton) {
-    cardImg.addEventListener('click', () => {
+  _setEventListeners() {
+    this._cardImg.addEventListener('click', () => {
       this._handleCardClick(this._name, this._link);
     });
-    cardsLikeButton.addEventListener('click', (evt) => {
+    this._likeButton.addEventListener('click', (evt) => {
       this._handleCardLike(evt);
     });
-    cardsDeleteButton.addEventListener('click', () => {
+    this._deleteButton.addEventListener('click', () => {
       this._handleCardDelete();
     });
   }
 
-  _handleCardLike(evt) {
-    evt.target.classList.toggle('photo-grid__like_active');
+  _handleCardLike() {
+    this._likeButton.classList.toggle('photo-grid__like_active');
   }
 
   _handleCardDelete() {

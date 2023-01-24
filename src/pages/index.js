@@ -32,40 +32,40 @@ const userInfo = new UserInfo(
   }
 )
 
-const editPopupForm = new PopupWithForm({
+const popupEditForm = new PopupWithForm({
   handleFormSubmit: (popupInputsValue) => {
     userInfo.setUserInfo(popupInputsValue.name, popupInputsValue.job);
-    editPopupForm.close();
+    popupEditForm.close();
   }
 }, profilePopup)
-editPopupForm.setEventListeners()
+popupEditForm.setEventListeners()
 
 profileEditButton.addEventListener('click', () => {
   const userData = userInfo.getUserInfo()
   handleProfileFormSubstitution(userData)
   profileFormValidator.resetValidation();
-  editPopupForm.open()
+  popupEditForm.open()
 });
 
-const addPopupForm = new PopupWithForm({
+const popupAddForm = new PopupWithForm({
   handleFormSubmit: (popupInputsValue) => {
     handleAddCardForm({
       name: popupInputsValue['caption-input'],
       link: popupInputsValue['link-input']
      });
-    addPopupForm.close()
+     popupAddForm.close()
   }
 }, popupAddElement)
-addPopupForm.setEventListeners()
+popupAddForm.setEventListeners()
 
 profileAddButton.addEventListener('click', () => {
   formAddValidator.resetValidation();
-  addPopupForm.open()
+  popupAddForm.open()
 });
 //--------------------------------------------------------------------------------------------
 //FUNC FOR OPENED IMG POPUP
-export const openImgPopup = new PopupWithImage(popupImgElement);
-openImgPopup.setEventListeners();
+export const popupOpenImg = new PopupWithImage(popupImgElement);
+popupOpenImg.setEventListeners();
 
 export const createCard = (item) => {
   const card = new Card(item, cadrsTemplate, handleCardClick)

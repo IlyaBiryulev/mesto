@@ -3,7 +3,7 @@ import { nameInput,
   cardsSelector
 } from "./constants.js";
 
-import { createCard, openImgPopup } from "../pages/index.js";
+import { createCard, popupOpenImg } from "../pages/index.js";
 
 export const handleProfileFormSubstitution = (userData) => {
   nameInput.value = userData.name;
@@ -15,5 +15,5 @@ export const handleAddCardForm = (popupInputsValue) => {
 }
 
 export const handleCardClick = (name, link) => {
-  openImgPopup.open(name, link);
+  popupOpenImg.open(name, link);
 }
