@@ -29,12 +29,17 @@ export const initialCards = [
 export const profilePopup = '.profile-popup';
 export const popupAddElement = '.popup_add-cards';
 export const popupImgElement = '.popup_open-img';
+export const popupUpdateAvatar = '.popup_update-avatar';
+export const popupDeleteConfirm = '.popup_confirmation-delete';
 //export const closeButtons = document.querySelectorAll('.popup__close-button');
 
 //POPUP EDIT-FORM
 export const profileForm = document.querySelector('.popup__form');
 export const nameInput =  profileForm.querySelector('.popup__form-edit_substitution_name');
 export const jobInput = profileForm.querySelector('.popup__form-edit_substitution_about-me');
+
+export const avatarForm = document.querySelector('.popup__form_update-avatar')
+export const avatarLinkInput = avatarForm.querySelector('.popup__form-udate_link');
 
 //POPUP ADD-FORM
 export const formAddElement = document.querySelector('.popup__form_add');
@@ -49,6 +54,7 @@ export const profileJob = profileSection.querySelector('.profile__about-me');
 //BUTTONS EDIT AND ADD
 export const profileEditButton = profileSection.querySelector('.profile__edit-button');
 export const profileAddButton = profileSection.querySelector('.profile__add-button');
+export const profileAvatarUpdateButton = profileSection.querySelector('.profile__avatar-update-button');
 
 //TEMPLATE
 export const cardsContainer = '.photo-grid';

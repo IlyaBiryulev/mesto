@@ -12,7 +12,7 @@
   </header>
   <main class="content">
     <section class="profile">
-      <img src="<%=require('./image/image.jpg')%>" alt="Фотография профиля" class="profile__image">
+      <button class="profile__avatar-update-button" type="button"><img src="#" alt="Фотография профиля" class="profile__image"></button>
       <div class="profile__info">
         <div class="profile__edit-info">
           <h1 class="profile__name">Жак-Ив Кусто</h1>
@@ -95,13 +95,43 @@
       <p class="popup__img-description">Архыз</p>
     </div>
   </section>
+  <section class="popup popup_update-avatar">
+    <div class="popup__container">
+      <h2 class="popup__title">Обновить аватар</h2>
+      <button class="popup__close-button" type="button"></button>
+      <form action="#" class="popup__form popup__form_update-avatar" name="popup-update-avatar" id="popup-update-avatar" novalidate>
+        <input
+          type="url"
+          class="popup__form-edit popup__form-edit_substitution_name popup__form-udate_link"
+          name="avatar"
+          id='avatar-input'
+          form="popup-update-avatar"
+          required
+          placeholder="Ссылка">
+        <span class="avatar-input-error popup__form-error"></span>
+        <button class="popup__submit-button popup__submit-button_disabled" type="submit">Сохранить</button>
+      </form>
+    </div>
+  </section>
+  <section class="popup popup_confirmation-delete">
+    <div class="popup__container">
+      <h2 class="popup__title">Вы уверены?</h2>
+      <button class="popup__close-button" type="button"></button>
+      <form action="#" class="popup__form popup__form_confirm-delete" name="confirm-delete" id="confirm-delete" novalidate>
+        <button class="popup__submit-button" type="submit">Да</button>
+      </form>
+    </div>
+  </section>
   <template class="cards-template">
     <div class="photo-grid__item">
       <img src="#" alt="изображение" class="photo-grid__image photo-grid__image_popup">
       <button class="photo-grid__delete-btn" type="button"></button>
       <div class="photo-grid__caption">
         <h2 class="photo-grid__title photo-grid__title_popup"></h2>
-        <button class="photo-grid__like" type="button"></button>
+        <div class="photo-grid__like-wrapper">
+          <button class="photo-grid__like" type="button"></button>
+          <p class="photo-grid__like-counter"></p>
+        </div>
       </div>
     </div>
   </template>
