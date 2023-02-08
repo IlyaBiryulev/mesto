@@ -60,12 +60,12 @@ export class Card {
 
   putCardLikeButton() {
     this._likeButton.classList.add('photo-grid__like_active');
-    return this.isLiked = true;
+    this.isLiked = true;
   }
 
   dislikeCardLikeButton() {
     this._likeButton.classList.remove('photo-grid__like_active');
-    return this.isLiked = false;
+    this.isLiked = false;
   }
 
   _toggleCardLike() {

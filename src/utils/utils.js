@@ -1,10 +1,10 @@
 import { nameInput,
   jobInput,
-  cardsSelector,
+  cards,
   avatarLinkInput
 } from "./constants.js";
 
-import { createCard, popupOpenImg } from "../pages/index.js";
+import { createCard } from "../pages/index.js";
 
 export const handleProfileFormSubstitution = (userData) => {
   nameInput.value = userData.name;
@@ -16,5 +16,5 @@ export const handleUpdateAvatarForm = (userData) => {
 }
 
 export const handleAddCardForm = (popupInputsValue) => {
-  cardsSelector.prepend(createCard(popupInputsValue))
+  cards.prepend(createCard(popupInputsValue))
 }

@@ -1,37 +1,9 @@
-export const initialCards = [
-  {
-    name: 'Архыз',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
-  },
-  {
-    name: 'Челябинская область',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
-  },
-  {
-    name: 'Иваново',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
-  },
-  {
-    name: 'Камчатка',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
-  },
-  {
-    name: 'Холмогорский район',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
-  },
-  {
-    name: 'Байкал',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
-  }
-];
-//--------------------------------------------------------------------------------------------
 //POPUP OPEN/CLOSE
-export const profilePopup = '.profile-popup';
-export const popupAddElement = '.popup_add-cards';
-export const popupImgElement = '.popup_open-img';
-export const popupUpdateAvatar = '.popup_update-avatar';
-export const popupDeleteConfirm = '.popup_confirmation-delete';
-//export const closeButtons = document.querySelectorAll('.popup__close-button');
+export const profilePopupSelector = '.profile-popup';
+export const popupAddElementSelector = '.popup_add-cards';
+export const popupImgElementSelector = '.popup_open-img';
+export const popupUpdateAvatarSelector = '.popup_update-avatar';
+export const popupDeleteConfirmSelector = '.popup_confirmation-delete';
 
 //POPUP EDIT-FORM
 export const profileForm = document.querySelector('.popup__form');
@@ -43,13 +15,8 @@ export const avatarLinkInput = avatarForm.querySelector('.popup__form-edit_udate
 
 //POPUP ADD-FORM
 export const formAddElement = document.querySelector('.popup__form_add');
-export const formInputName = formAddElement.querySelector('.popup__form-edit_name');
-export const formInputLink = formAddElement.querySelector('.popup__form-edit_link');
-
 //PROFILE ELEMENTS
 export const profileSection = document.querySelector('.profile');
-export const profileName = profileSection.querySelector('.profile__name');
-export const profileJob = profileSection.querySelector('.profile__about-me');
 
 //BUTTONS EDIT AND ADD
 export const profileEditButton = profileSection.querySelector('.profile__edit-button');
@@ -58,12 +25,9 @@ export const profileAvatarUpdateButton = profileSection.querySelector('.profile_
 
 //TEMPLATE
 export const cardsContainer = '.photo-grid';
-export const cardsSelector = document.querySelector('.photo-grid');
+export const cards = document.querySelector('.photo-grid');
 export const cadrsTemplate = '.cards-template';
 
-//POPUP IMG
-//export const popupCardImg = popupImgElement.querySelector('.popup__image');
-//export const popupCardTitle = popupImgElement.querySelector('.popup__img-description');
 
 export const escKeyCode = 'Escape';
 

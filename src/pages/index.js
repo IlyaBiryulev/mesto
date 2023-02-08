@@ -9,13 +9,13 @@ import { PopupWithForm } from "../components/PopupWithForm.js";
 import { UserInfo } from "../components/UserInfo.js";
 import PopupWithConfirm from '../components/PopupWithConfirm.js';
 
-import { initialCards,
-  profilePopup,
-  popupAddElement,
-  popupImgElement,
+import {
+  profilePopupSelector,
+  popupAddElementSelector,
+  popupImgElementSelector,
   profileForm,
-  popupUpdateAvatar,
-  popupDeleteConfirm,
+  popupUpdateAvatarSelector,
+  popupDeleteConfirmSelector,
   formAddElement,
   avatarForm,
   profileEditButton,
@@ -87,7 +87,6 @@ export const createCard = (item) => {
 }
 
 const cardList = new Section({
-  data: initialCards,
   renderer: (item) => {
     cardList.addItem(createCard(item))
   }
@@ -126,7 +125,7 @@ const popupUpdateAvatarForm = new PopupWithForm({
       popupUpdateAvatarForm.rendererLoading(false)
     })
   }
-}, popupUpdateAvatar)
+}, popupUpdateAvatarSelector)
 popupUpdateAvatarForm.setEventListeners()
 
 profileAvatarUpdateButton.addEventListener('click', () => {
@@ -154,7 +153,7 @@ const popupEditForm = new PopupWithForm({
     /*userInfo.setUserInfo(popupInputsValue.name, popupInputsValue.job);
     popupEditForm.close();*/
   }
-}, profilePopup)
+}, profilePopupSelector)
 popupEditForm.setEventListeners()
 
 profileEditButton.addEventListener('click', () => {
@@ -179,7 +178,7 @@ const popupAddForm = new PopupWithForm({
       popupAddForm.rendererLoading(false)
     })
   }
-}, popupAddElement)
+}, popupAddElementSelector)
 popupAddForm.setEventListeners()
 
 
@@ -190,10 +189,10 @@ profileAddButton.addEventListener('click', () => {
 });
 //--------------------------------------------------------------------------------------------
 //FUNC FOR OPENED IMG POPUP
-export const popupOpenImg = new PopupWithImage(popupImgElement);
+export const popupOpenImg = new PopupWithImage(popupImgElementSelector);
 popupOpenImg.setEventListeners();
 
-const popupWithConfirm = new PopupWithConfirm(popupDeleteConfirm);
+const popupWithConfirm = new PopupWithConfirm(popupDeleteConfirmSelector);
 popupWithConfirm.setEventListeners();
 //--------------------------------------------------------------------------------------------
 
