@@ -39,7 +39,7 @@ export const nameInput =  profileForm.querySelector('.popup__form-edit_substitut
 export const jobInput = profileForm.querySelector('.popup__form-edit_substitution_about-me');
 
 export const avatarForm = document.querySelector('.popup__form_update-avatar')
-export const avatarLinkInput = avatarForm.querySelector('.popup__form-udate_link');
+export const avatarLinkInput = avatarForm.querySelector('.popup__form-edit_udate-link');
 
 //POPUP ADD-FORM
 export const formAddElement = document.querySelector('.popup__form_add');
