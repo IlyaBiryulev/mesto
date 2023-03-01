@@ -29,13 +29,19 @@
 <h3>Команды для установки и запуска проекта</h3>
 <ul>
   <li>Клонирование репозитория</li>
-  ```<p>git clone https://github.com/IlyaBiryulev/mesto.git</p>```
+  ```
+  git clone https://github.com/IlyaBiryulev/mesto.git
+  ```
   <li>Установка менеджера пакетов NPM</li>
-  ```<p>npm install</p>```
+  ```
+  npm install
+  ```
   <li>Сборка проекста при помощи Webpack</li>
-  ```<p>npm run build</p>```
+  ```
+  npm run build
+  ```
   <li>Запуск проекта на локальном сервере</li>
-  ```<p>npm run dev</p>```
+  ```npm run dev```
 </ul>
 
 <h3><a href="https://www.figma.com/file/2cn9N9jSkmxD84oJik7xL7/JavaScript.-Sprint-4?node-id=0%3A1&t=rZ1yRexqgFY3MnVG-0">Ссылка на макет сайта</a></h3>
