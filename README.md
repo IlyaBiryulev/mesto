@@ -39,5 +39,4 @@
 </ul>
 
 <h3><a href="https://www.figma.com/file/2cn9N9jSkmxD84oJik7xL7/JavaScript.-Sprint-4?node-id=0%3A1&t=rZ1yRexqgFY3MnVG-0">Ссылка на макет сайта</a></h3>
-
 <h3><a href="https://ilyabiryulev.github.io/mesto/">Ссылка на сайт</a></h3>
