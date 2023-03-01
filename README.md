@@ -29,17 +29,11 @@
 <h3>Команды для установки и запуска проекта</h3>
 <ul>
   <li>Клонирование репозитория</li>
-  ```
-  git clone https://github.com/IlyaBiryulev/mesto.git
-  ```
+  ```git clone https://github.com/IlyaBiryulev/mesto.git```
   <li>Установка менеджера пакетов NPM</li>
-  ```
-  npm install
-  ```
+  ```npm install```
   <li>Сборка проекста при помощи Webpack</li>
-  ```
-  npm run build
-  ```
+  ```npm run build```
   <li>Запуск проекта на локальном сервере</li>
   ```npm run dev```
 </ul>
